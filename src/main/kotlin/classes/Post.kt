@@ -2,7 +2,6 @@ package ru.netology.classes
 
 data class Post(
     var id: Long = 0,
-    var idCounterNext: Long = 1,
     val fromId: Long = 0,
     val ownerId: Long = 0,
     val date: Int = 1,

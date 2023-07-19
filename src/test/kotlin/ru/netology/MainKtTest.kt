@@ -8,12 +8,12 @@ class MainKtTest {
 
     @Before
     fun clearBeforeTest() {
-        WallService.clear()
+        WallService().clear()
     }
 
     @Test
     fun addIdTest() {
-        val service = WallService
+        val service = WallService()
         service.add(Post())
         service.add(Post())
         assertTrue(service.getLast().id != 0.toLong())
@@ -21,7 +21,7 @@ class MainKtTest {
 
     @Test
     fun updateWithExist() {
-        val service = WallService
+        val service = WallService()
 
         service.add(Post())
         service.add(Post())
@@ -34,7 +34,7 @@ class MainKtTest {
 
     @Test
     fun updateWithNoExist() {
-        val service = WallService
+        val service = WallService()
 
         service.add(Post())
         service.add(Post())

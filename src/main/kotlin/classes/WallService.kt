@@ -2,8 +2,12 @@ package ru.netology.classes
 
 import java.util.*
 
-object WallService {
+class WallService {
     private var posts = emptyArray<Post>()
+
+    init {
+        idCounterNext = 1
+    }
 
     /*
     fun likeById(id: Int,
@@ -11,14 +15,18 @@ object WallService {
         post.likes.add(id)
     }
     */
+    companion object { //static count
+        @JvmField
+        var idCounterNext: Long = 1
+    }
 
     fun clear() {
         posts = emptyArray<Post>()
     }
 
     fun add (post: Post) {
-        post.id = post.idCounterNext
-        post.idCounterNext += 1
+        post.id = WallService.idCounterNext
+        WallService.idCounterNext += 1
         posts += post
     }
 
@@ -35,4 +43,11 @@ object WallService {
         }
         return false
     }
+
+    fun printAll() {
+        for (post in posts) {
+            println(post)
+        }
+    }
+
 }
