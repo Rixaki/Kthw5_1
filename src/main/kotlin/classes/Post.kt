@@ -7,17 +7,25 @@ data class Post(
     val date: Int = 1,
     val message: String = "default message",
     var isFriendsOnly: Boolean = true,
-    //var likes: LikeObj,
-    //var comments: CommentsObj,
-    //var reports: ReportObj,
-    //var geo: GeoObj
+    //var likes: LikeClass,
+    //var comments: CommentsClass,
+    //var reports: ReportClass,
+    //var geo: GeoClass
 )
 
-object LikeObj {
+private class LikeClass {
     private var likesIds = emptyArray<Int>()
 
     fun add(id: Int) {
         likesIds += id
+    }
+
+    fun remove(id: Int): Boolean {
+        val isThere = likesIds.contains(id)
+        likesIds
+            .filter { it != id }
+            .toIntArray()
+        return isThere
     }
 
     fun count (): Int {
@@ -43,7 +51,7 @@ object OneCommentObj {
     }
 }
 
-object CommentsObj {
+class CommentsClass {
     private var isCommentable = true
     private var comments = emptyArray<OneCommentObj>()
 
@@ -77,7 +85,7 @@ object CommentsObj {
     }
 }
 
-object ReportObj {
+class ReportClass {
     private var reportsIds = emptyArray<Int>()
 
     fun add(id: Int) {
@@ -93,7 +101,7 @@ object ReportObj {
     }
 }
 
-object GeoObj {
+class GeoClass {
     private val geo2d = IntArray(2) { 0 }
     private var geoStr = geo2d.toString()
 

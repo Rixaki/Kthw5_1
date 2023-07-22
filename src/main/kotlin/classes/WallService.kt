@@ -25,9 +25,9 @@ class WallService {
     }
 
     fun add (post: Post) {
-        post.id = WallService.idCounterNext
+	    val postCopy = post.copy(id = WallService.idCounterNext)
         WallService.idCounterNext += 1
-        posts += post
+        posts += postCopy
     }
 
     fun getLast (): Post {
@@ -45,6 +45,7 @@ class WallService {
     }
 
     fun printAll() {
+        println("List of posts:")
         for (post in posts) {
             println(post)
         }
