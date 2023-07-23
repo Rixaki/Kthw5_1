@@ -7,34 +7,34 @@ data class Post(
     val date: Int = 1,
     val message: String = "default message",
     var isFriendsOnly: Boolean = true,
-    //var likes: LikeClass,
-    //var comments: CommentsClass,
-    //var reports: ReportClass,
-    //var geo: GeoClass
+    var likes: LikeClass = LikeClass(),
+    //var comments: CommentsClass = LikeClass(),
+    //var reports: ReportClass = ReportClass(),
+    //var geo: GeoClass = GeoClass()
 )
 
-private class LikeClass {
-    private var likesIds = emptyArray<Int>()
+open class LikeClass {
+    private var likesIds = emptyList<Int>()
 
     fun add(id: Int) {
-        likesIds += id
+        if (isLikedById(id)) likesIds else likesIds += id
     }
 
     fun remove(id: Int): Boolean {
         val isThere = likesIds.contains(id)
-        likesIds
-            .filter { it != id }
-            .toIntArray()
+        likesIds = likesIds.filter { it != id }
         return isThere
     }
 
-    fun count (): Int {
+    fun count(): Int {
         return likesIds.size
     }
 
-    fun isLikedById (checkId: Int): Boolean {
+    fun isLikedById(checkId: Int): Boolean {
         return checkId in likesIds
     }
+
+    override fun toString() = this.likesIds.toString()
 }
 
 object OneCommentObj {
@@ -42,11 +42,11 @@ object OneCommentObj {
     private var message: String? = null
     var answers = emptyArray<OneCommentObj>()
 
-    fun edit (newMessage: String) {
+    fun edit(newMessage: String) {
         message = newMessage
     }
 
-    fun showAnswers (): Array<OneCommentObj> {
+    fun showAnswers(): Array<OneCommentObj> {
         return answers
     }
 }
@@ -66,18 +66,20 @@ class CommentsClass {
         }
     }
 
-    fun answer(comment: OneCommentObj,
-               commentTo: OneCommentObj){
+    fun answer(
+        comment: OneCommentObj,
+        commentTo: OneCommentObj
+    ) {
         if (isCommentable) {
             commentTo.answers += comment
         }
     }
 
-    fun count (): Int {
+    fun count(): Int {
         if (isCommentable) {
             var result = 0
-            for (comment in comments){
-               result += 1 + comment.answers.size
+            for (comment in comments) {
+                result += 1 + comment.answers.size
             }
             return result
         }
@@ -92,28 +94,35 @@ class ReportClass {
         reportsIds += id
     }
 
-    fun count (): Int {
+    fun count(): Int {
         return reportsIds.size
     }
 
-    fun isLikedById (checkId: Int): Boolean {
+    fun isLikedById(checkId: Int): Boolean {
         return checkId in reportsIds
     }
 }
 
 class GeoClass {
-    private val geo2d = IntArray(2) { 0 }
+    private var geo2d = IntArray(2) { 0 }
     private var geoStr = geo2d.toString()
 
-    fun renameGeoStr (msg: String) {
+    fun renameGeoStr(msg: String) {
         geoStr = msg
     }
 
-    fun showGeo2d (): IntArray {
+    fun setGeo2d(
+        latitude: Int,
+        longitude: Int
+    ) {
+        geo2d = intArrayOf(latitude, longitude)
+    }
+
+    fun showGeo2d(): IntArray {
         return geo2d
     }
 
-    fun showGeoStr (): String {
+    fun showGeoStr(): String {
         return geoStr
     }
 }

@@ -1,7 +1,5 @@
 package ru.netology.classes
 
-import java.util.*
-
 class WallService {
     private var posts = emptyArray<Post>()
 
@@ -24,19 +22,19 @@ class WallService {
         posts = emptyArray<Post>()
     }
 
-    fun add (post: Post) {
-	    val postCopy = post.copy(id = WallService.idCounterNext)
-        WallService.idCounterNext += 1
+    fun add(post: Post) {
+        val postCopy = post.copy(id = idCounterNext)
+        idCounterNext += 1
         posts += postCopy
     }
 
-    fun getLast (): Post {
+    fun getLast(): Post {
         return posts.last()
     }
 
     fun update(updatedPost: Post): Boolean {
-        for ((index,post) in posts.withIndex()) {
-            if (post.id == updatedPost.id){
+        for ((index, post) in posts.withIndex()) {
+            if (post.id == updatedPost.id) {
                 posts[index] = updatedPost.copy()
                 return true
             }
