@@ -13,7 +13,7 @@ data class Post(
     //var geo: GeoClass = GeoClass()
 )
 
-open class LikeClass {
+class LikeClass {
     private var likesIds = emptyList<Int>()
 
     fun add(id: Int) {
