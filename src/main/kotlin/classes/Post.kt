@@ -2,18 +2,23 @@ package ru.netology.classes
 
 data class Post(
     var id: Long = 0,
-    val fromId: Long = 0,
     val ownerId: Long = 0,
+    val fromId: Long = 0,
+    val createdById: Long = 0,
     val date: Int = 1,
-    val message: String = "default message",
+    var message: String = "default message",
+    val replyOwnerId: Long = 0,
+    val replyPostId: Long = 0,
     var isFriendsOnly: Boolean = true,
-    var likes: LikeClass = LikeClass(),
-    //var comments: CommentsClass = LikeClass(),
-    //var reports: ReportClass = ReportClass(),
-    //var geo: GeoClass = GeoClass()
+    var comments: CommentsClass = CommentsClass(),
+    var copyright: CopyrightClass? = CopyrightClass(),
+    var likes: LikeClass? = LikeClass(),
+    var views: ViewClass? = ViewClass(),
+    var reports: ReportClass = ReportClass(),
+    var geo: GeoClass = GeoClass()
 )
 
-open class LikeClass {
+class LikeClass {
     private var likesIds = emptyList<Int>()
 
     fun add(id: Int) {
@@ -124,6 +129,34 @@ class GeoClass {
 
     fun showGeoStr(): String {
         return geoStr
+    }
+}
+
+class CopyrightClass {
+    private var id: Long = 0
+        set(idNew) {
+            field = if(idNew > 0) idNew else field
+        }
+    private var link: String? = "default String"
+        set(linkNew: String?) {
+            field = linkNew ?: "undefined link"
+        }
+
+}
+
+class ViewClass {
+    private var viewsIds = emptyList<Int>()
+
+    fun add(id: Int) {
+        if (isLikedById(id)) viewsIds else viewsIds += id
+    }
+
+    fun count(): Int {
+        return viewsIds.size
+    }
+
+    private fun isLikedById(checkId: Int): Boolean {
+        return checkId in viewsIds
     }
 }
 
