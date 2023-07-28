@@ -135,7 +135,7 @@ class GeoClass {
 class CopyrightClass {
     private var id: Long = 0
         set(idNew) {
-            field = if(idNew > 0) idNew else field
+            field = if (idNew > 0) idNew else field
         }
     private var link: String? = "default String"
         set(linkNew: String?) {

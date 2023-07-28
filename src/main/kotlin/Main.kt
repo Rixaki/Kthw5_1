@@ -1,9 +1,8 @@
 package ru.netology
 
+import ru.netology.classes.PhotoAttachment
 import ru.netology.classes.Post
 import ru.netology.classes.WallService
-import ru.netology.classes.Attachment
-import ru.netology.classes.Photo
 
 fun main(args: Array<String>) {
 
@@ -29,7 +28,7 @@ fun main(args: Array<String>) {
     service2.printAll()
 
     println()
-    val photo = Photo()
+    val photo = PhotoAttachment.Photo()
     photo.message = "photo description"
     println(photo)
 }
