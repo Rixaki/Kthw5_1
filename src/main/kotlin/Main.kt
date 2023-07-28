@@ -1,5 +1,6 @@
 package ru.netology
 
+import ru.netology.classes.PhotoAttachment
 import ru.netology.classes.Post
 import ru.netology.classes.WallService
 
@@ -14,11 +15,11 @@ fun main(args: Array<String>) {
 
     service2.add(Post())
     service2.add(Post())
-    service2.getLast().likes.add(55)
-    service2.getLast().likes.add(83)
-    service2.getLast().likes.add(83)
-    service2.getLast().likes.remove(55)
-    service2.getLast().likes.remove(14)
+    service2.getLast().likes?.add(55)
+    service2.getLast().likes?.add(83)
+    service2.getLast().likes?.add(83)
+    service2.getLast().likes?.remove(55)
+    service2.getLast().likes?.remove(14)
     service2.add(Post())
     service2.printAll()
 
@@ -26,4 +27,8 @@ fun main(args: Array<String>) {
     service2.update(testPost)
     service2.printAll()
 
+    println()
+    val photo = PhotoAttachment.Photo()
+    photo.message = "photo description"
+    println(photo)
 }
